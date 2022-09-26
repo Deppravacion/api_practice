@@ -31,7 +31,9 @@ iceCreams
 // Promise
 //   .all([iceCreams, dogs])
 //   .then((response) => {
-//     return Promise.all(response.map((res) => res.json()));
+//     return Promise
+        // .all(response
+        // .map((res) => res.json()));
 //   })
 //   .then((data) => {
 

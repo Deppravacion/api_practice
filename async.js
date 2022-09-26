@@ -21,7 +21,7 @@ const getData = async (names) => {
 
 
 };
-getData(["jradness", "devslopes"]);
+// getData(["jradness", "devslopes"]);
 
 
 let treatObj;
@@ -33,28 +33,41 @@ const dogTreatsData = async (paths) => {
     .then(res => res.json()));
   
   const sources = await Promise.all(promises);
-  // console.log(sources);
+  
   [treats, dogs] = sources;
   console.log([treats, dogs]);
+  // treats.forEeach(treat => {
+  //   const markup = `<h2>${treat.name}`;
+
+  //   document.querySelector('div').insertAdjacentHTML("beforeend", markup);
+  // })
   return [treatObj, dogObj] = sources;
+
   
 };
 
 dogTreatsData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
+// dogTreatsData(["dogs"]);
 
-const elemFromHtml = (html) => {
-  const template = document.createElement("template");
+setTimeout(testing,3000);
+
+function testing() {
+  const elemFromHtml = (html) => {
+    const template = document.createElement("template");  
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
+  }
   
-  template.innerHTML = html.trim();
-
-  return template.content.firstElementChild;
+  
+  const myHtml = elemFromHtml(`
+  <h2>${treatObj.data[4].name}</h2>
+  <h2>this works, </h2>
+  `);
+  
+  document.body.appendChild(myHtml);
 }
 
-console.log(treatObj);
 
-const myHtml = elemFromHtml(`
 
-<h2>this works, </h2>
-`);
 
-document.body.appendChild(myHtml);
+
