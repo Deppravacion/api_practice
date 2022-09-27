@@ -49,7 +49,7 @@ const dogTreatsData = async (paths) => {
 dogTreatsData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 
 
-setTimeout(testing,3000);
+// setTimeout(testing,3000);
 
 function testing() {
   const elemFromHtml = (html) => {
@@ -69,6 +69,17 @@ function testing() {
 
 
 
+//try it out
 
+function newMessage() {
+  return new Promise(res => {
+    res(('Check out the hook while my DJ resolves it'))
+  })
+}
 
+async function main() {
+  const message = await newMessage();
+  console.log(message);
+}
 
+main();
