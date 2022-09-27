@@ -47,7 +47,7 @@ const dogTreatsData = async (paths) => {
 };
 
 dogTreatsData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
-// dogTreatsData(["dogs"]);
+
 
 setTimeout(testing,3000);
 
@@ -66,6 +66,7 @@ function testing() {
   
   document.body.appendChild(myHtml);
 }
+
 
 
 
