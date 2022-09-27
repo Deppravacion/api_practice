@@ -36,11 +36,6 @@ const dogTreatsData = async (paths) => {
   
   [treats, dogs] = sources;
   console.log([treats, dogs]);
-  // treats.forEeach(treat => {
-  //   const markup = `<h2>${treat.name}`;
-
-  //   document.querySelector('div').insertAdjacentHTML("beforeend", markup);
-  // })
   return [treatObj, dogObj] = sources;
 
   
@@ -49,7 +44,7 @@ const dogTreatsData = async (paths) => {
 dogTreatsData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 
 
-// setTimeout(testing,3000);
+setTimeout(testing,3000);
 
 function testing() {
   const elemFromHtml = (html) => {
@@ -74,6 +69,7 @@ function testing() {
 function newMessage() {
   return new Promise(res => {
     res(('Check out the hook while my DJ resolves it'))
+ 
   })
 }
 
