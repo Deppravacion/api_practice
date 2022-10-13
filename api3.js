@@ -11,21 +11,35 @@ const getData = async (paths) => {
 
   [treatObj, dogObj] = accounts;
   let dogNamesArr = [];
+  let treatObjArr = [];
   let ul = document.createElement('ul');
   dogObj.data.forEach(item => {
+    // console.log(item.name);
+    dogNamesArr.push(item.name); 
+  })
+
+  treatObj.data.forEach(item => {
     console.log(item.name);
-    dogNamesArr.push(item.name);
- 
+    treatObjArr.push(item.name);
   })
 
   dogNamesArr.sort();
-  dogNamesArr.reverse();
+  treatObjArr.sort();  
 
   for (let dog of dogNamesArr) {
     let li = document.createElement('li');
     li.innerText = dog;
     ul.appendChild(li);
+ 
   }
+
+  for (let treat of treatObjArr) {
+    let li = document.createElement('li');
+    li.innerText = treat;
+    ul.appendChild(li);
+  }
+
+
 
   const myHtml = elemFromHtml(`
   <h2>${dogObj.data[4].name}</h2>  
@@ -36,9 +50,6 @@ const getData = async (paths) => {
   
 };
 getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
-
-{/* <h3>${treatObj.data[4].name}</h3> */}
-
 
 
 const elemFromHtml = (html) => {
