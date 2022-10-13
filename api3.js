@@ -1,3 +1,6 @@
+let dogNamesArr = [];
+let treatNamesArr = [];
+
 
 const getData = async (paths) => {
   const promises = paths
@@ -10,9 +13,12 @@ const getData = async (paths) => {
   console.log(accounts);
 
   [treatObj, dogObj] = accounts;
-  let dogNamesArr = [];
-  let treatObjArr = [];
+
+  let div = document.createElement('div');
   let ul = document.createElement('ul');
+
+
+
   dogObj.data.forEach(item => {
     // console.log(item.name);
     dogNamesArr.push(item.name); 
@@ -20,11 +26,11 @@ const getData = async (paths) => {
 
   treatObj.data.forEach(item => {
     console.log(item.name);
-    treatObjArr.push(item.name);
+    treatNamesArr.push(item.name);
   })
 
   dogNamesArr.sort();
-  treatObjArr.sort();  
+  treatNamesArr.sort();  
 
   for (let dog of dogNamesArr) {
     let li = document.createElement('li');
@@ -33,17 +39,12 @@ const getData = async (paths) => {
  
   }
 
-  for (let treat of treatObjArr) {
+  for (let treat of treatNamesArr) {
     let li = document.createElement('li');
     li.innerText = treat;
     ul.appendChild(li);
   }
 
-
-
-  const myHtml = elemFromHtml(`
-  <h2>${dogObj.data[4].name}</h2>  
-  `);
 
   document.body.appendChild(ul);
   
