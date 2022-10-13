@@ -32,18 +32,27 @@ const getData = async (paths) => {
   dogNamesArr.sort();
   treatNamesArr.sort();  
 
-  for (let dog of dogNamesArr) {
+  for (let name of dogNamesArr) {
     let li = document.createElement('li');
-    li.innerText = dog;
+    li.innerText = name;
     ul.appendChild(li);
  
   }
+  // DRY principal here on the for loops, bring them out side create a function to use here
 
-  for (let treat of treatNamesArr) {
+  for (let name of treatNamesArr) {
     let li = document.createElement('li');
-    li.innerText = treat;
+    li.innerText = name;
     ul.appendChild(li);
   }
+
+  // for (let)
+
+
+
+
+
+
 
 
   document.body.appendChild(ul);
