@@ -20,7 +20,7 @@ const getData = async (paths) => {
 
 
   dogObj.data.forEach(item => {
-    // console.log(item.name);
+ 
     dogNamesArr.push(item.name); 
   })
 
@@ -46,7 +46,6 @@ const getData = async (paths) => {
     ul.appendChild(li);
   }
 
-  // for (let)
 
 
 
