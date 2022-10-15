@@ -1,3 +1,4 @@
+const container = document.querySelector('.container');
 
 const cardArr = [];
 
@@ -8,7 +9,8 @@ const getData = async (paths) => {
   const accounts = await Promise.all(promises);
 
   [treatObj, dogObj] = accounts;
-  
+  console.log(accounts);
+
   giveMewhatIWant([treatObj, dogObj], cardArr);
 
 };
@@ -23,3 +25,31 @@ const giveMewhatIWant = (arr, card) => {
     })
   })
 }
+
+const createCards = () => {
+  const cards = cardArr
+  // .map(({color, header, des1, des2}) => (
+  .map(({name, description, photoUrl}) => (
+    `
+      <div class="card-wrapper blue">
+        <div class="card-header">
+          <h2>${name}</h2>
+         
+        </div>
+        <div class="card-content">
+          <p>${description}</p>
+          <p>${photoUrl}</p>
+        </div>
+      </div>
+
+    `
+
+  )).join('')
+  console.log(cards);
+  container.innerHTML = cards;
+}
+
+createCards();
+
+
+// partial works. the desctrucutre object for treats work, but dogs needs keys
