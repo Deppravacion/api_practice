@@ -8,10 +8,7 @@ const getData = async (paths) => {
   const accounts = await Promise.all(promises);
 
   [treatObj, dogObj] = accounts;
-
-
-  // giveMewhatIWant(treatObj, cardArr);
-  // giveMewhatIWant(dogObj, cardArr);
+  
   giveMewhatIWant([treatObj, dogObj], cardArr);
 
 };
