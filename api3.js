@@ -20,12 +20,10 @@ const getData = async (paths) => {
 
 
   dogObj.data.forEach(item => {
- 
     dogNamesArr.push(item.name); 
   })
 
   treatObj.data.forEach(item => {
-    console.log(item.name);
     treatNamesArr.push(item.name);
   })
 
@@ -45,15 +43,6 @@ const getData = async (paths) => {
     li.innerText = name;
     ul.appendChild(li);
   }
-
-
-
-
-
-
-
-
-
   document.body.appendChild(ul);
   
   
