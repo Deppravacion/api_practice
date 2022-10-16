@@ -20,15 +20,15 @@ getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 const giveMewhatIWant = (arr, card) => {
   arr.forEach(obj => {
     obj.data.forEach(item => {
-      [name, description, breed, photo] = [item.name, item.description, item.breed, item.photoUrl];
-      card.push({name, description, breed, photo}); 
+      [name, description, breed, age, photo] = [item.name, item.description, item.breed, item.age,  item.photoUrl];
+      card.push({name, description, breed, age, photo}); 
     })
   })
 }
 
 const createCards = () => {
   const cards = cardArr
-  .map(({name, description, photo}) => (
+  .map(({name, description, breed, age, photo}) => (
     `
       <div class="card-wrapper blue">
         <div class="card-header">
@@ -39,6 +39,7 @@ const createCards = () => {
          
           ${description ? `<p>${description}</p>` : ''}
           ${breed ? `<p>${breed}</p>` : ''}
+          ${age ? `<p>${age} years old!</p>` : ''}
 
           <div class="img-wrapper">
             <img src="${photo}">
