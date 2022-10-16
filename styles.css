@@ -8,7 +8,7 @@
 
 .card-wrapper {
   border: 1px solid black;
-  border-radius: 8ps;
+  border-radius: 8px;
   padding: 1rem;
   max-width: 200px;
   display: flex;
@@ -16,6 +16,7 @@
   justify-content: center;
   line-height: 1.2;
   margin: 1rem auto;
+  box-shadow: 1px 1px 11px grey;
 }
 
 .card-wrapper * {
@@ -26,6 +27,18 @@
 .card-content {
   text-align: center;
 }
+
+.img-wrapper {
+  max-width: 150px;
+}
+
+.img-wrapper img {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 11px;
+  box-shadow: 1px 10px 11px #fff;
+}
+
 
 .red {
   background-color: orangered;

@@ -20,16 +20,15 @@ getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 const giveMewhatIWant = (arr, card) => {
   arr.forEach(obj => {
     obj.data.forEach(item => {
-      [name, description, photo] = [item.name, item.description, item.photoUrl];
-      card.push({name, description, photo}); 
+      [name, description, breed, photo] = [item.name, item.description, item.breed, item.photoUrl];
+      card.push({name, description, breed, photo}); 
     })
   })
 }
 
 const createCards = () => {
   const cards = cardArr
-  // .map(({color, header, des1, des2}) => (
-  .map(({name, description, photoUrl}) => (
+  .map(({name, description, photo}) => (
     `
       <div class="card-wrapper blue">
         <div class="card-header">
@@ -37,8 +36,13 @@ const createCards = () => {
          
         </div>
         <div class="card-content">
-          <p>${description}</p>
-          <p>${photoUrl}</p>
+         
+          ${description ? `<p>${description}</p>` : ''}
+          ${breed ? `<p>${breed}</p>` : ''}
+
+          <div class="img-wrapper">
+            <img src="${photo}">
+          </div>
         </div>
       </div>
 
@@ -49,7 +53,10 @@ const createCards = () => {
   container.innerHTML = cards;
 }
 
-createCards();
+setTimeout(() => {
+  createCards();
+  console.log('testing timer');
+}, 2000);
 
 
 // partial works. the desctrucutre object for treats work, but dogs needs keys

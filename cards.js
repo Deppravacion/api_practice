@@ -28,6 +28,9 @@ const createCards = () => {
   container.innerHTML = cards;
 }
 
-createCards();
+setTimeout(() => {
+  createCards();
+  console.log('testing timer');
+}, 2000);
 
 
