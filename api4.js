@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 
 const cardArr = [];
+const favoritesArr = [];
 
 const getData = async (paths) => {
   const promises = paths
@@ -28,36 +29,36 @@ const giveMewhatIWant = (arr, card) => {
 
 const createCards = () => {
   const cards = cardArr
-  .map(({name, description, breed, age, photo}) => (
-    `
-      <div class="card-wrapper blue">
-        <div class="card-header">
-          <h2>${name}</h2>
-         
-        </div>
-        <div class="card-content">
-         
-          ${description ? `<p>${description}</p>` : ''}
-          ${breed ? `<p>${breed}</p>` : ''}
-          ${age ? `<p>${age} years old!</p>` : ''}
-
-          <div class="img-wrapper">
-            <img src="${photo}">
+    .map(({name, description, breed, age, photo}) => (
+      `
+        <div class="card-wrapper blue">
+          <div class="card-header">
+            <h2>${name}</h2>         
+          </div>
+          <div class="card-content">         
+            ${description ? `<p>${description}</p>` : ''}
+            ${breed ? `<p>${breed}</p>` : ''}
+            ${age ? `<p>${age} years old!</p>` : ''}
+            <div class="img-wrapper">
+              <img src="${photo}">
+            </div>
           </div>
         </div>
-      </div>
 
-    `
+      `
 
-  )).join('')
+    )).join('')
   console.log(cards);
   container.innerHTML = cards;
 }
 
+
+
+
+
+
 setTimeout(() => {
   createCards();
-  console.log('testing timer');
-}, 2000);
+}, 500);
 
 
-// partial works. the desctrucutre object for treats work, but dogs needs keys
