@@ -1,3 +1,5 @@
+const body = document.body;
+const div = document.createElement('div');
 const container = document.querySelector('.container');
 
 const cardArr = [];
@@ -61,4 +63,5 @@ setTimeout(() => {
   createCards();
 }, 500);
 
-
+div.append('hey boosh');
+body.append(div)
