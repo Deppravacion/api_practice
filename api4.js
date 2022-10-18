@@ -63,8 +63,13 @@ const createCards = () => {
 //click event for favorites
 document.addEventListener('click', (e) => {
   console.log(e.target);
+  console.log(e.path[2]);// path method allows to select parent elements
 })
 
+//function to match click event button id value within an array
+const matching = (elm, arr) => {
+  
+}
 
 setTimeout(() => {
   createCards();
