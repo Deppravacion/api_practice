@@ -1,6 +1,8 @@
 const body = document.body;
 const div = document.createElement('div');
 const container = document.querySelector('.container');
+const button = document.querySelector('.button');
+const addToFavorite = document.querySelector(button);
 
 const cardArr = [];
 const favoritesArr = [];
@@ -29,6 +31,7 @@ const giveMewhatIWant = (arr, card) => {
   })
 }
 
+
 const createCards = () => {
   const cards = cardArr
     .map(({name, description, breed, age, photo}) => (
@@ -44,11 +47,12 @@ const createCards = () => {
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
+            <div class="button" id="${name.toLowerCase()}">
+              Favorite
+            </div>
           </div>
         </div>
-
       `
-
     )).join('')
   console.log(cards);
   container.innerHTML = cards;
@@ -56,12 +60,15 @@ const createCards = () => {
 
 
 
-
+//click event for favorites
+document.addEventListener('click', (e) => {
+  console.log(e.target);
+})
 
 
 setTimeout(() => {
   createCards();
 }, 500);
-
-div.append('hey boosh');
+ 
+div.textContent = "hey boosh";
 body.append(div)

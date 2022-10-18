@@ -51,3 +51,14 @@
 .blue {
   background-color: lightblue;
 }
+
+.button {
+  cursor: pointer;
+  padding: 10px;
+  background: darkgrey;
+  border-radius: 11px;
+}
+
+.favorite {
+  box-shadow: 1px 1px 15PX 5px #df1414;
+}
