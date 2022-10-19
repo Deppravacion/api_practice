@@ -62,14 +62,36 @@ const createCards = () => {
 
 //click event for favorites
 document.addEventListener('click', (e) => {
-  console.log(e.target);
-  console.log(e.path[2]);// path method allows to select parent elements
+  console.log(e.target.name);
+  //make this a function 
 })
 
 //function to match click event button id value within an array
 const matching = (elm, arr) => {
   
 }
+
+
+const splicePush = (first, second, e) => {
+  let index = (first.indexOf(e)) - 1;
+  first.splice(index, 1);
+  second.push(first[index]);
+
+}
+
+//function n is the string to match, arr1 is the array to search, arr2 arr to push
+const movingTrucks = (n, arr1, arr2) => {
+  arr1.forEach(elm => {
+    let name = elm.name.toLowerCase();
+    if (!name === n) { 
+      return 
+    } else {
+      splicePush(arr1, arr2, name)    
+    }
+  })
+}
+
+
 
 setTimeout(() => {
   createCards();
