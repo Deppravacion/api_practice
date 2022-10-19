@@ -32,8 +32,8 @@ const giveMewhatIWant = (arr, card) => {
 }
 
 
-const createCards = () => {
-  const cards = cardArr
+const createCards = (arr) => {
+  const cards = arr
     .map(({name, description, breed, age, photo}) => (
       `
         <div class="card-wrapper blue">
@@ -60,10 +60,18 @@ const createCards = () => {
 
 
 
-//click event for favorites
+//click event for favorites  need to be function
+// this will ignore clicks that are not with a class of button
 document.addEventListener('click', (e) => {
-  console.log(e.target.name);
-  //make this a function 
+  if(!e.target.className == 'button') {
+    return
+  }
+  if (e.target.className == 'button') {
+    console.log(e.target.id);
+    console.log(e.target.className);
+  }
+
+
 })
 
 //function to match click event button id value within an array
@@ -84,20 +92,27 @@ const splicePush = (first, second, e) => {
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
-    if (name === n) {
-      let index = (arr1.indexOf(name)) - 1;
 
+    if (name === n) {
+
+      let index = (arr1.indexOf(elm)) - 1;
       arr1.splice(index, 1);
       arr2.push(arr1[index]);   
+      console.log('It has been done');
     }
 
   })
 }
 
 
+//move to favorite/add class
+const classPush = () => {
+
+}
+
 
 setTimeout(() => {
-  createCards();
+  createCards(cardArr);
 }, 500);
  
 div.textContent = "hey boosh";
