@@ -1,8 +1,8 @@
 const body = document.body;
 const div = document.createElement('div');
 const container = document.querySelector('.container');
-const button = document.querySelector('.button');
-const addToFavorite = document.querySelector(button);
+
+
 
 const cardArr = [];
 const favoritesArr = [];
@@ -17,7 +17,6 @@ const getData = async (paths) => {
   console.log(accounts);
 
   giveMewhatIWant([treatObj, dogObj], cardArr);
-
 };
 
 getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
@@ -60,17 +59,12 @@ const createCards = (arr) => {
 
 
 
-//click event for favorites  need to be function
-// this will ignore clicks that are not with a class of button
+//click accepts only class button
 document.addEventListener('click', (e) => {
-  if(!e.target.className == 'button') {
-    return
-  }
   if (e.target.className == 'button') {
-    console.log(e.target.id);
-    console.log(e.target.className);
+  console.log(`ID: ${e.target.id}`);
+  console.log(`Class: ${e.target.className}`);
   }
-
 
 })
 
@@ -81,11 +75,18 @@ const matching = (elm, arr) => {
 
 // bringing this function outside of movingTrucks has caused issues... undefined results
 
-const splicePush = (first, second, e) => {
-  let index = (first.indexOf(e)) - 1;
-  console.log(index);
-  first.splice(index, 1);
-  second.push(first[index]);
+
+
+
+
+// array, indexvariable
+
+const cutArr = (arr, i) => {
+  arr.slice(i, 1)
+}
+
+const pushArr = (arr, elm) => {
+  arr.push(elm);
 }
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
@@ -94,11 +95,9 @@ const movingTrucks = (n, arr1, arr2) => {
     let name = elm.name.toLowerCase();
 
     if (name === n) {
-
-      let index = (arr1.indexOf(elm)) - 1;
-      arr1.splice(index, 1);
-      arr2.push(arr1[index]);   
-      console.log('It has been done');
+      let index = (arr1.indexOf(elm));
+      cutArr(arr1, index);
+      pushArr(arr2, arr1[index]);
     }
 
   })
@@ -106,9 +105,22 @@ const movingTrucks = (n, arr1, arr2) => {
 
 
 //move to favorite/add class
-const classPush = () => {
+const classPush = (elm, arr) => {
+  //toggle the arrloation and the class
+
 
 }
+
+
+
+const printMain = () => {
+  createCards(cardArr);
+}
+
+const printFavorites = () => {
+  createCards(favoritesArr);
+}
+
 
 
 setTimeout(() => {
