@@ -1,12 +1,16 @@
 const body = document.body;
 const div = document.createElement('div');
 const container = document.querySelector('.container');
-
-
-
-const cardArr = [];
+const main = document.querySelector('.main');
+const master = document.querySelector('.master');
+const button = 'button';
+const favorites = 'favorites';
+const mainArr = [];
 const favoritesArr = [];
 
+
+
+//grab data from API's
 const getData = async (paths) => {
   const promises = paths
     .map(path => fetch(`https://freerandomapi.cyclic.app/api/v1/${path}`)
@@ -16,11 +20,12 @@ const getData = async (paths) => {
   [treatObj, dogObj] = accounts;
   console.log(accounts);
 
-  giveMewhatIWant([treatObj, dogObj], cardArr);
+  giveMewhatIWant([treatObj, dogObj], mainArr);
 };
 
 getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 
+//grab object key/value data
 const giveMewhatIWant = (arr, card) => {
   arr.forEach(obj => {
     obj.data.forEach(item => {
@@ -30,7 +35,7 @@ const giveMewhatIWant = (arr, card) => {
   })
 }
 
-
+//create html
 const createCards = (arr) => {
   const cards = arr
     .map(({name, description, breed, age, photo}) => (
@@ -54,32 +59,31 @@ const createCards = (arr) => {
       `
     )).join('')
   console.log(cards);
-  container.innerHTML = cards;
+  main.innerHTML = cards;
 }
 
 
 
 //click accepts only class button
+//click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
-  if (e.target.className == 'button') {
+  let target = e.target;
+  if (target.className == button) {
   console.log(`ID: ${e.target.id}`);
   console.log(`Class: ${e.target.className}`);
+  //toggle favorites class. 
+  //toggle array location, favs/main
+  classToggler(target)
   }
 
 })
+
+
 
 //function to match click event button id value within an array
 const matching = (elm, arr) => {
   
 }
-
-// bringing this function outside of movingTrucks has caused issues... undefined results
-
-
-
-
-
-// array, indexvariable
 
 const cutArr = (arr, i) => {
   arr.slice(i, 1)
@@ -90,6 +94,11 @@ const pushArr = (arr, elm) => {
 }
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
+//DRY SRP
+//1.find match
+//2.cut from arr
+//3.push to  arr
+//
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
@@ -105,8 +114,17 @@ const movingTrucks = (n, arr1, arr2) => {
 
 
 //move to favorite/add class
-const classPush = (elm, arr) => {
+const classToggler = (elm) => {
   //toggle the arrloation and the class
+  //if current class != favorites => add class favorites
+  //else remove class favorites
+  console.log(elm.className);
+  if (elm.className === favorites) {
+    console.log(elm.className);
+    elm.classList.remove(favorites);
+  } else {
+    elm.classList.add(favorites);
+  }
 
 
 }
@@ -114,17 +132,15 @@ const classPush = (elm, arr) => {
 
 
 const printMain = () => {
-  createCards(cardArr);
+  createCards(mainArr);
 }
 
 const printFavorites = () => {
   createCards(favoritesArr);
 }
 
-
-
 setTimeout(() => {
-  createCards(cardArr);
+  createCards(mainArr);
 }, 500);
  
 div.textContent = "hey boosh";

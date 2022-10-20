@@ -1,3 +1,9 @@
+.master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   margin-top: 200px;
   display: flex;
@@ -59,6 +65,10 @@
   border-radius: 11px;
 }
 
-.favorite {
+.favorites {
   box-shadow: 1px 1px 15PX 5px #df1414;
+}
+
+.main {
+  box-shadow: 1px 1px 15PX 5px #14df2f;
 }
