@@ -67,15 +67,19 @@ const createCards = (arr, section) => {
 //click accepts only class button
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
+  let id = e.target.id;
+  let className = e.target.className;
+  let title = e.target.title;
   let target = e.target;
 
-  if (target.id == button) { 
-    // should use dataset instead of classlists for sorting
-  console.log(`ID: ${e.target.id}`);
-  console.log(`Class: ${e.target.className}`);
+  if (id == button) { 
+  console.log(`ID: ${id}`);
+  console.log(`Class: ${className}`);
+  console.log(`Class: ${title}`);
   //toggle favorites class. 
   classToggler(target)
   //toggle array location, favs/main
+  // movingTrucks()
   }
 
 })
@@ -110,11 +114,10 @@ const movingTrucks = (n, arr1, arr2) => {
 const classToggler = (elm) => {
   const fav = 'favorites';
   elm.classList.toggle(fav);
-
 }
 
 
-const rePrint = () => {
+const printAll = () => {
   printFavorites();
   printMain();
 }
@@ -124,13 +127,12 @@ const printMain = () => {
 }
 
 const printFavorites = () => {
-  createCards(favoritesArr);
+  createCards(favoritesArr, favorites);
 }
 
 setTimeout(() => {
-  createCards(mainArr, main);
-
-}, 600);
+  printAll();
+}, 690);
  
 div.textContent = "hey boosh";
 body.append(div)
