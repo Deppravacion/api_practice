@@ -68,12 +68,12 @@ const createCards = (arr) => {
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
   let target = e.target;
-  if (target.className == button) {
+  if (target.className == button || (button && favorites)) {
   console.log(`ID: ${e.target.id}`);
   console.log(`Class: ${e.target.className}`);
   //toggle favorites class. 
-  //toggle array location, favs/main
   classToggler(target)
+  //toggle array location, favs/main
   }
 
 })
@@ -115,17 +115,9 @@ const movingTrucks = (n, arr1, arr2) => {
 
 //move to favorite/add class
 const classToggler = (elm) => {
-  //toggle the arrloation and the class
-  //if current class != favorites => add class favorites
-  //else remove class favorites
   console.log(elm.className);
-  if (elm.className === favorites) {
-    console.log(elm.className);
-    elm.classList.remove(favorites);
-  } else {
-    elm.classList.add(favorites);
-  }
-
+  const fav = 'favorites';
+  elm.classList.toggle(fav);
 
 }
 
