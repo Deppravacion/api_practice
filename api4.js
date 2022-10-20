@@ -3,6 +3,7 @@ const div = document.createElement('div');
 const container = document.querySelector('.container');
 const main = document.querySelector('.main');
 const master = document.querySelector('.master');
+const favs = document.querySelector('.favorites');
 const button = 'button';
 const favorites = 'favorites';
 const mainArr = [];
@@ -79,7 +80,8 @@ document.addEventListener('click', (e) => {
   //toggle favorites class. 
   classToggler(target)
   //toggle array location, favs/main
-  // movingTrucks()
+  movingTrucks(title, mainArr, favoritesArr)
+  printAll();
   }
 
 })
@@ -127,7 +129,7 @@ const printMain = () => {
 }
 
 const printFavorites = () => {
-  createCards(favoritesArr, favorites);
+  createCards(favoritesArr, favs);
 }
 
 setTimeout(() => {
