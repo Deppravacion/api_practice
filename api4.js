@@ -36,7 +36,7 @@ const giveMewhatIWant = (arr, card) => {
 }
 
 //create html
-const createCards = (arr) => {
+const createCards = (arr, section) => {
   const cards = arr
     .map(({name, description, breed, age, photo}) => (
       `
@@ -51,7 +51,7 @@ const createCards = (arr) => {
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
-            <div class="button" id="${name.toLowerCase()}">
+            <div class="button" id="button" title="${name.toLowerCase()}" data>
               Favorite
             </div>
           </div>
@@ -59,7 +59,7 @@ const createCards = (arr) => {
       `
     )).join('')
   console.log(cards);
-  main.innerHTML = cards;
+  section.innerHTML = cards;
 }
 
 
@@ -68,7 +68,9 @@ const createCards = (arr) => {
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
   let target = e.target;
-  if (target.className == button || (button && favorites)) {
+
+  if (target.id == button) { 
+    // should use dataset instead of classlists for sorting
   console.log(`ID: ${e.target.id}`);
   console.log(`Class: ${e.target.className}`);
   //toggle favorites class. 
@@ -80,18 +82,11 @@ document.addEventListener('click', (e) => {
 
 
 
-//function to match click event button id value within an array
-const matching = (elm, arr) => {
-  
-}
 
-const cutArr = (arr, i) => {
-  arr.slice(i, 1)
-}
 
-const pushArr = (arr, elm) => {
-  arr.push(elm);
-}
+const cutArr = (arr, i) => { arr.slice(i, 1) }
+
+const pushArr = (arr, elm) => { arr.push(elm); }
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 //DRY SRP
@@ -102,29 +97,30 @@ const pushArr = (arr, elm) => {
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
-
     if (name === n) {
       let index = (arr1.indexOf(elm));
       cutArr(arr1, index);
       pushArr(arr2, arr1[index]);
     }
-
   })
 }
 
 
 //move to favorite/add class
 const classToggler = (elm) => {
-  console.log(elm.className);
   const fav = 'favorites';
   elm.classList.toggle(fav);
 
 }
 
 
+const rePrint = () => {
+  printFavorites();
+  printMain();
+}
 
 const printMain = () => {
-  createCards(mainArr);
+  createCards(mainArr, main);
 }
 
 const printFavorites = () => {
@@ -132,8 +128,9 @@ const printFavorites = () => {
 }
 
 setTimeout(() => {
-  createCards(mainArr);
-}, 500);
+  createCards(mainArr, main);
+
+}, 600);
  
 div.textContent = "hey boosh";
 body.append(div)
