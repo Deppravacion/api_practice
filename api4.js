@@ -121,6 +121,40 @@ const classToggler = (elm) => {
 }
 
 
+
+
+//sorting functions  
+const alphaSort = (arr) => {
+  arr.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  })
+}
+
+const reversoSort = (arr) => {
+  arr.sort((a, b) => {
+    if (a.name < b.name) {
+      return 1;
+    }
+    if (a.name > b.name) {
+      return -1;
+    }
+    return 0;
+  })
+}
+
+const shuffleSort = (arr) => {
+  arr.sort(() => Math.random() - 0.5);
+}
+
+
+
+//printing machines
 const printAll = () => {
   printFavorites();
   printMain();
@@ -133,6 +167,7 @@ const printMain = () => {
 const printFavorites = () => {
   createCards(favoritesArr, favs);
 }
+
 
 setTimeout(() => {
   printAll();
