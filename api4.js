@@ -94,14 +94,7 @@ document.addEventListener('click', e => {
 
 
   if (id === button) {
-
-    if (title === 'az' ) {
-      alphaSort(favoritesArr);
-      console.log('alphasort() has completed');
-    } else if (title === 'rev') {
-      reversoSort(favoritesArr);
-      console.log('reversoSort() has completed');
-    }
+    title === 'az' ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
     printFavorites();
   }
 })
@@ -124,7 +117,7 @@ const pushArr = (arr, elm) => { arr.push(elm); }
 //1.find match
 //2.cut from arr
 //3.push to  arr
-//
+//can this fucker be dynamic to move into and from the fav array
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
