@@ -86,6 +86,31 @@ document.addEventListener('click', (e) => {
 
 })
 
+document.addEventListener('click', e => {
+  let button = 'sortFavorites';
+  let id = e.target.id;
+  let target = e.target;
+  let title = e.target.title;
+
+
+  if (id === button) {
+
+    if (title === 'az' ) {
+      alphaSort(favoritesArr);
+      console.log('alphasort() has completed');
+    } else if (title === 'rev') {
+      reversoSort(favoritesArr);
+      console.log('reversoSort() has completed');
+    }
+    printFavorites();
+  }
+})
+
+    
+    
+  
+
+
 
 
 
