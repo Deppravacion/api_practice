@@ -64,7 +64,7 @@ const createCards = (arr, section) => {
 }
 
 
-
+//needs to disallow duplicates
 //click accepts only class button
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
@@ -105,8 +105,10 @@ const movingTrucks = (n, arr1, arr2) => {
     let name = elm.name.toLowerCase();
     if (name === n) {
       let index = (arr1.indexOf(elm));
-      cutArr(arr1, index);
-      pushArr(arr2, arr1[index]);
+      // cutArr(arr1, index);
+      arr1.splice((index), 1);
+      arr2.push(elm);
+     
     }
   })
 }
