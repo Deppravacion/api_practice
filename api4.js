@@ -1,5 +1,6 @@
 //1. toggle class function is non Oper
 //2. moving trucks needs to be dynamic, move to and for Favs
+//add data attributes as pointers instead of targeting using class names
 
 
 
@@ -7,13 +8,12 @@
 const body = document.body;
 const div = document.createElement('div');
 const container = document.querySelector('.container');
-const main = document.querySelector('.main');
-const master = document.querySelector('.master');
-const favs = document.querySelector('.favorites');
-//use data attibutes sukkafish
-// const buttons = document.querySelector('[data-card-btn]'); // has to be declared after render
+const main = document.querySelector('[data-section="main"]');
+const master = document.querySelector('[data-section="master"]');
+const favorites = document.querySelector('[data-section="favorites"]');
 
-const favorites = 'favorites';
+
+
 const mainArr = [];
 const favoritesArr = [];
 
@@ -47,6 +47,7 @@ const giveMewhatIWant = (arr, card) => {
 const createCards = (arr, section) => {
   const cards = arr
     .map(({name, description, breed, age, photo}) => (
+    
       `
         <div class="card-wrapper " data-cardName="${name}">
           <div class="card-header">
@@ -59,7 +60,7 @@ const createCards = (arr, section) => {
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
-            <div class="button" id="button" title="${name.toLowerCase()}" data-card-btn="button" data-isfav="false">
+            <div class="button" id="button" title="${name.toLowerCase()}" data-button data-isfav="false">
               Favorite
             </div>
           </div>
@@ -76,7 +77,8 @@ document.addEventListener('click', (e) => {
   let className = e.target.className;
   let title = e.target.title;
   let target = e.target;
-  let data = document.querySelector('[data-card-btn]');
+  // let data = document.querySelector('[data-card-btn]');
+  let data = document.querySelector('[data-button]');
   
 
 // if (target == document.querySelector('[data-card-btn]')) {
@@ -146,7 +148,7 @@ const movingTrucks = (n, arr1, arr2) => {
 
 //add class   this is NOT adding the class...
 const classToggler = (elm) => {
-  const button = document.querySelector('[data-card-btn]');
+  const button = document.querySelector('[data-button]');
   // elm.classList.toggle('favorites');
   // elm.classList == '!favorites' ? elm.classList.add('favorites') : console.log('testing erros');
   // console.log(elm);
@@ -201,7 +203,7 @@ const printMain = () => {
 }
 
 const printFavorites = () => {
-  createCards(favoritesArr, favs);
+  createCards(favoritesArr, favorites);
 }
 
 
