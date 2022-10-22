@@ -6,7 +6,7 @@
 
 
 const body = document.body;
-const div = document.createElement('div');
+const newDiv = document.createElement('div');
 const container = document.querySelector('.container');
 const main = document.querySelector('[data-section="main"]');
 const master = document.querySelector('[data-section="master"]');
@@ -101,18 +101,33 @@ if (target == data) {
 })
 
 
+
+
+
+
+//using ID and Title to target, refactor to use data-attributes
+
 //click event for sorting fuction
 document.addEventListener('click', e => {
-  let button = 'sortFavorites';
-  let id = e.target.id;
-  let target = e.target;
-  let title = e.target.title;
+  // let button = 'sortFavorites';
+  // let id = e.target.id;
+  // let target = e.target;
+  // let title = e.target.title;
 
 
-  if (id === button) {
-    title === 'az' ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
-    printFavorites();
-  }
+  // if (id === button) {
+  //   title === 'az' ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
+  //   printFavorites();
+  // }
+
+
+// testing below, above working
+  let sortOrder = e.target.dataset.sort;
+  let alpha = 'alpha';
+
+  sortOrder == alpha ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
+  printFavorites();
+
 })
 
     
@@ -206,10 +221,9 @@ const printFavorites = () => {
   createCards(favoritesArr, favorites);
 }
 
-
 setTimeout(() => {
   printAll();
 }, 690);
  
-div.textContent = "hey boosh";
-body.append(div)
+// newDiv.textContent = "hey its a new Div here";
+// body.append(newDiv)
