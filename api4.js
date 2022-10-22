@@ -1,3 +1,9 @@
+//1. toggle class function is non Oper
+//2. moving trucks needs to be dynamic, move to and for Favs
+
+
+
+
 const body = document.body;
 const div = document.createElement('div');
 const container = document.querySelector('.container');
@@ -5,6 +11,7 @@ const main = document.querySelector('.main');
 const master = document.querySelector('.master');
 const favs = document.querySelector('.favorites');
 //use data attibutes sukkafish
+// const buttons = document.querySelector('[data-card-btn]'); // has to be declared after render
 const favorites = 'favorites';
 const mainArr = [];
 const favoritesArr = [];
@@ -71,15 +78,19 @@ document.addEventListener('click', (e) => {
   let className = e.target.className;
   let title = e.target.title;
   let target = e.target;
+  
 
+if (target == document.querySelector('[data-card-btn]')) {
+  console.log('this mofo dtyaset and set');
+}
 
   if (id == 'button') { 
   console.log(`ID: ${id}`);
   console.log(`Class: ${className}`);
   // console.log(className == 'favorites' ? 'true favs' : button);
-  console.log(`Class: ${title}`);
+ 
   //toggle favorites class. 
-  classToggler(button);
+  classToggler(target);
   //toggle array location, favs/main
   movingTrucks(title, mainArr, favoritesArr)
   printAll();
@@ -87,6 +98,8 @@ document.addEventListener('click', (e) => {
 
 })
 
+
+//click event for sorting fuction
 document.addEventListener('click', e => {
   let button = 'sortFavorites';
   let id = e.target.id;
@@ -101,12 +114,6 @@ document.addEventListener('click', e => {
 })
 
     
-    
-  
-
-
-
-
 
 // put conditionals in these functions
 // then load them into movingTrucks()
@@ -122,6 +129,7 @@ const pushArr = (arr, elm) => {
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 
 //can this fucker be dynamic to move into and from the fav array
+
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
@@ -136,14 +144,16 @@ const movingTrucks = (n, arr1, arr2) => {
 }
 
 
-//add class
+//add class   this is NOT adding the class...
 const classToggler = (elm) => {
-  const button = document.querySelector('.button');
+  const button = document.querySelector('[data-card-btn]');
   // elm.classList.toggle('favorites');
   // elm.classList == '!favorites' ? elm.classList.add('favorites') : console.log('testing erros');
   // console.log(elm);
-  console.log(elm.button);
-  elm.button.classList.add('favorites');
+  console.log(button);
+  button.classList.add('.favorites');
+
+  // elm.button.classList.add('favorites');
 }
 
 
