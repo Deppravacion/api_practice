@@ -4,7 +4,7 @@ const container = document.querySelector('.container');
 const main = document.querySelector('.main');
 const master = document.querySelector('.master');
 const favs = document.querySelector('.favorites');
-const button = 'button';
+//use data attibutes sukkafish
 const favorites = 'favorites';
 const mainArr = [];
 const favoritesArr = [];
@@ -52,14 +52,13 @@ const createCards = (arr, section) => {
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
-            <div class="button" id="button" title="${name.toLowerCase()}" data>
+            <div class="button" id="button" title="${name.toLowerCase()}" data-card-btn="button" data-isfav="false">
               Favorite
             </div>
           </div>
         </div>
       `
     )).join('')
-  console.log(cards);
   section.innerHTML = cards;
 }
 
@@ -73,12 +72,14 @@ document.addEventListener('click', (e) => {
   let title = e.target.title;
   let target = e.target;
 
-  if (id == button) { 
+
+  if (id == 'button') { 
   console.log(`ID: ${id}`);
   console.log(`Class: ${className}`);
+  // console.log(className == 'favorites' ? 'true favs' : button);
   console.log(`Class: ${title}`);
   //toggle favorites class. 
-  classToggler(target)
+  classToggler(button);
   //toggle array location, favs/main
   movingTrucks(title, mainArr, favoritesArr)
   printAll();
@@ -107,23 +108,26 @@ document.addEventListener('click', e => {
 
 
 
+// put conditionals in these functions
+// then load them into movingTrucks()
+const cutArr = (arr, i) => { 
+   
+  arr.slice(i, 1) 
+}
 
-const cutArr = (arr, i) => { arr.slice(i, 1) }
-
-const pushArr = (arr, elm) => { arr.push(elm); }
+const pushArr = (arr, elm) => { 
+  arr.push(elm); 
+}
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
-//DRY SRP
-//1.find match
-//2.cut from arr
-//3.push to  arr
+
 //can this fucker be dynamic to move into and from the fav array
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
     if (name === n) {
       let index = (arr1.indexOf(elm));
-      // cutArr(arr1, index);
+      // cutArr()
       arr1.splice((index), 1);
       arr2.push(elm);
      
@@ -132,10 +136,14 @@ const movingTrucks = (n, arr1, arr2) => {
 }
 
 
-//move to favorite/add class
+//add class
 const classToggler = (elm) => {
-  const fav = 'favorites';
-  elm.classList.toggle(fav);
+  const button = document.querySelector('.button');
+  // elm.classList.toggle('favorites');
+  // elm.classList == '!favorites' ? elm.classList.add('favorites') : console.log('testing erros');
+  // console.log(elm);
+  console.log(elm.button);
+  elm.button.classList.add('favorites');
 }
 
 
