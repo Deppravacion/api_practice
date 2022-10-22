@@ -12,6 +12,7 @@ const master = document.querySelector('.master');
 const favs = document.querySelector('.favorites');
 //use data attibutes sukkafish
 // const buttons = document.querySelector('[data-card-btn]'); // has to be declared after render
+
 const favorites = 'favorites';
 const mainArr = [];
 const favoritesArr = [];
@@ -30,7 +31,6 @@ const getData = async (paths) => {
 
   giveMewhatIWant([treatObj, dogObj], mainArr);
 };
-
 getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
 
 //grab object key/value data
@@ -43,12 +43,12 @@ const giveMewhatIWant = (arr, card) => {
   })
 }
 
-//create html
+//create html cards
 const createCards = (arr, section) => {
   const cards = arr
     .map(({name, description, breed, age, photo}) => (
       `
-        <div class="card-wrapper blue">
+        <div class="card-wrapper " data-cardName="${name}">
           <div class="card-header">
             <h2>${name}</h2>         
           </div>
@@ -70,17 +70,17 @@ const createCards = (arr, section) => {
 }
 
 
-//needs to disallow duplicates
-//click accepts only class button
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
   let id = e.target.id;
   let className = e.target.className;
   let title = e.target.title;
   let target = e.target;
+  let data = document.querySelector('[data-card-btn]');
   
 
-if (target == document.querySelector('[data-card-btn]')) {
+// if (target == document.querySelector('[data-card-btn]')) {
+if (target == data) {
   console.log('this mofo dtyaset and set');
 }
 
