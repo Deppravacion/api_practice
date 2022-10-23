@@ -2,6 +2,11 @@
 //2. moving trucks needs to be dynamic, move to and for Favs
 //add data attributes as pointers instead of targeting using class names
 
+//attempted to use movingTrucks to move into favs and into main, but it only moves one way, into favs
+//attempted some destructuring and object.values().includes methods in order to search but was did not find the efficient path
+
+
+
 
 
 
@@ -17,6 +22,7 @@ const favorites = document.querySelector('[data-section="favorites"]');
 
 const mainArr = [];
 const favoritesArr = [];
+const arraySet = [mainArr, favoritesArr];
 
 
 
@@ -84,44 +90,21 @@ document.addEventListener('click', (e) => {
   const button = data.button;
   const name = data.name;
 
+  console.log(button);
+  console.log(target);
+
   if (!button == 'true') {
     return
   }
 
-    favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
-    // methodStack(divCardWrapper, className, name, target);
-    
 
-    
-    printAll();
-  // if (id == 'button') { 
-  // console.log(`ID: ${id}`);
-  // console.log(`Class: ${className}`);
-  // // console.log(className == 'favorites' ? 'true favs' : button);
- 
-  // ////toggle favorites class. 
-  // classToggler(target);
-  // ////toggle array location, favs/main
-  // movingTrucks(title, mainArr, favoritesArr)
-  // printAll();
-  // }
+  favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
 
+  // favorite == 'false' ? cargoShip(name) : movingTrucks(name, favoritesArr, mainArr);
+  // methodStack(divCardWrapper, className, name, target);
+
+  printAll();
 })
-
-
-
-//method sandwich
-
-// const methodStack = (className, favorite, name, target) => {
-//   //run the total functions needed for click event
-//   //move from array to array
-//   favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
-
-//   //toggle data-isFav
-//   //toggle class
-//   //printAll()
-
-// }
 
 
 
@@ -149,12 +132,50 @@ const pushArr = (arr, elm) => {
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 
+//a better version of movingTrucks
+
+const cargoShip = (clickedName) => {
+  let [arr1, arr2] = arraySet;
+  // console.log(Object.values(arr1));//this is giving me thelist of objects. not the values from each individual object
+  // console.log(Object.values(arr1).includes(clickedName));
+
+  
+  arr1.forEach(elm => {
+    let name = elm.name.toLowerCase();
+    let nameArr = [];
+
+    // nameArr.push(name);
+    // console.log('includes method:' + Object.values(arr1).includes(clickedName));
+    // console.log('includes method:' + nameArr.includes(clickedName));
+
+
+    if (!name === clickedName) { return }
+    if (name === clickedName) {
+      // boomBoom(arr1, arr2, elm); // this function deleted 
+    }
+
+  })
+
+  arr2.forEach(elm => {
+    let name = elm.name.toLowerCase();
+
+    if (!name === clickedName) { return }
+    if (name === clickedName) {
+
+    }
+  })
+}
+  
+
+
+
 const movingTrucks = (n, arr1, arr2) => {
+  console.log(n);
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
     if (name === n) {
+    
       let index = (arr1.indexOf(elm));
-      // cutArr()
       arr1.splice((index), 1);
       arr2.push(elm);     
     }
