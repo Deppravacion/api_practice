@@ -83,16 +83,17 @@ document.addEventListener('click', (e) => {
   const favorite = data.isFav;
   const button = data.button;
   const name = data.name;
+
   if (!button == 'true') {
     return
   }
 
-    // favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
-  console.log(className);
-    methodStack(divCardWrapper, className, favorite, name, target);
-    printAll();
-  
+    favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
+    // methodStack(divCardWrapper, className, name, target);
+    
 
+    
+    printAll();
   // if (id == 'button') { 
   // console.log(`ID: ${id}`);
   // console.log(`Class: ${className}`);
@@ -111,17 +112,16 @@ document.addEventListener('click', (e) => {
 
 //method sandwich
 
-const methodStack = (d, className, favorite, name) => {
-  //run the total functions needed for click event
-  //move from array to array
-  // favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
+// const methodStack = (className, favorite, name, target) => {
+//   //run the total functions needed for click event
+//   //move from array to array
+//   favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
 
-  //toggle data-isFav
-  favToggler(favorite);
-  //toggle class
-  //printAll()
+//   //toggle data-isFav
+//   //toggle class
+//   //printAll()
 
-}
+// }
 
 
 
@@ -149,8 +149,6 @@ const pushArr = (arr, elm) => {
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 
-//can this fucker be dynamic to move into and from the fav array
-
 const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
@@ -177,11 +175,19 @@ const classToggler = (elm) => {
 }
 
 const favToggler = (elm) => {
-  console.log(`favToggler report elm was ""${elm}"`);
+  // console.log(`favToggler report elm was "${fav}"`);
+  
 
-  elm == 'true' ? elm = 'false' : elm = 'true';
-  console.log(`favToggler report elm now is "${elm}"`);
+  // // elm == 'true' ? elm = 'false' : elm = 'true';
+  // if (!fav == 'true') {
+  //   return fav = 'true';
+  // }
+  
+  // if (fav == 'true') {
+  //   return fav = 'false';
+  // }
 
+  // console.log(`favToggler report elm now is "${fav}"`);
 }
 
 
