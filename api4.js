@@ -14,6 +14,7 @@ const favorites = document.querySelector('[data-section="favorites"]');
 
 
 
+
 const mainArr = [];
 const favoritesArr = [];
 
@@ -49,7 +50,7 @@ const createCards = (arr, section) => {
     .map(({name, description, breed, age, photo}) => (
     
       `
-        <div class="card-wrapper " data-cardName="${name}">
+        <div id="card-wrapper" class="card-wrapper " data-cardName="${name}">
           <div class="card-header">
             <h2>${name}</h2>         
           </div>
@@ -60,7 +61,7 @@ const createCards = (arr, section) => {
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
-            <div class="button" id="button" title="${name.toLowerCase()}" data-button data-isfav="false">
+            <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-name="${name.toLowerCase()}">
               Favorite
             </div>
           </div>
@@ -73,61 +74,64 @@ const createCards = (arr, section) => {
 
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
-  let id = e.target.id;
-  let className = e.target.className;
-  let title = e.target.title;
-  let target = e.target;
-  // let data = document.querySelector('[data-card-btn]');
-  let data = document.querySelector('[data-button]');
+  const divCardWrapper = document.querySelector('#card-wrapper')
+  const target = e.target;
+  const id = target.id;
+  const className = target.className;
+  const title = target.title;
+  const data = target.dataset;
+  const favorite = data.isFav;
+  const button = data.button;
+  const name = data.name;
+  if (!button == 'true') {
+    return
+  }
+
+    // favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
+  console.log(className);
+    methodStack(divCardWrapper, className, favorite, name, target);
+    printAll();
   
 
-// if (target == document.querySelector('[data-card-btn]')) {
-if (target == data) {
-  console.log('this mofo dtyaset and set');
-}
-
-  if (id == 'button') { 
-  console.log(`ID: ${id}`);
-  console.log(`Class: ${className}`);
-  // console.log(className == 'favorites' ? 'true favs' : button);
+  // if (id == 'button') { 
+  // console.log(`ID: ${id}`);
+  // console.log(`Class: ${className}`);
+  // // console.log(className == 'favorites' ? 'true favs' : button);
  
-  //toggle favorites class. 
-  classToggler(target);
-  //toggle array location, favs/main
-  movingTrucks(title, mainArr, favoritesArr)
-  printAll();
-  }
+  // ////toggle favorites class. 
+  // classToggler(target);
+  // ////toggle array location, favs/main
+  // movingTrucks(title, mainArr, favoritesArr)
+  // printAll();
+  // }
 
 })
 
 
 
+//method sandwich
+
+const methodStack = (d, className, favorite, name) => {
+  //run the total functions needed for click event
+  //move from array to array
+  // favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
+
+  //toggle data-isFav
+  favToggler(favorite);
+  //toggle class
+  //printAll()
+
+}
 
 
 
-//using ID and Title to target, refactor to use data-attributes
-
-//click event for sorting fuction
+//click event for sorting function
 document.addEventListener('click', e => {
-  // let button = 'sortFavorites';
-  // let id = e.target.id;
-  // let target = e.target;
-  // let title = e.target.title;
-
-
-  // if (id === button) {
-  //   title === 'az' ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
-  //   printFavorites();
-  // }
-
-
-// testing below, above working
-  let sortOrder = e.target.dataset.sort;
-  let alpha = 'alpha';
+  const alpha = 'alpha';
+  const sortOrder = e.target.dataset.sort;
 
   sortOrder == alpha ? alphaSort(favoritesArr) : reversoSort(favoritesArr);
   printFavorites();
-
 })
 
     
@@ -154,8 +158,7 @@ const movingTrucks = (n, arr1, arr2) => {
       let index = (arr1.indexOf(elm));
       // cutArr()
       arr1.splice((index), 1);
-      arr2.push(elm);
-     
+      arr2.push(elm);     
     }
   })
 }
@@ -171,6 +174,14 @@ const classToggler = (elm) => {
   button.classList.add('.favorites');
 
   // elm.button.classList.add('favorites');
+}
+
+const favToggler = (elm) => {
+  console.log(`favToggler report elm was ""${elm}"`);
+
+  elm == 'true' ? elm = 'false' : elm = 'true';
+  console.log(`favToggler report elm now is "${elm}"`);
+
 }
 
 
