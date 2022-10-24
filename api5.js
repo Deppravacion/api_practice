@@ -47,8 +47,8 @@ getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit
 const giveMewhatIWant = (arr, card) => {
   arr.forEach(obj => {
     obj.data.forEach(item => {
-      [name, description, breed, age, photo] = [item.name, item.description, item.breed, item.age,  item.photoUrl];
-      card.push({name, description, breed, age, photo}); 
+      [name, description, photo, favorited,] = [item.name, item.description, item.photoUrl, ''];
+      card.push({name, description, photo, favorited}); 
     })
   })
 }
@@ -71,8 +71,9 @@ const createCards = (arr, section) => {
               <img src="${photo}">
             </div>
             <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-name="${name.toLowerCase()}">
-              Favorite
+              add/remove
             </div>
+            <div id="starDiv" class="star"></div>
           </div>
         </div>
       `
@@ -93,8 +94,6 @@ document.addEventListener('click', (e) => {
   const button = data.button;
   const name = data.name;
 
-  console.log(button);
-  console.log(target);
 
   if (!button == 'true') {
     return
@@ -130,52 +129,17 @@ const pushArr = (arr, elm) => {
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 
-//a better version of movingTrucks
-
-const cargoShip = (clickedName) => {
-  let [arr1, arr2] = arraySet;
-  // console.log(Object.values(arr1));//this is giving me thelist of objects. not the values from each individual object
-  // console.log(Object.values(arr1).includes(clickedName));
-
-  
-  arr1.forEach(elm => {
-    let name = elm.name.toLowerCase();
-    let nameArr = [];
-
-    // nameArr.push(name);
-    // console.log('includes method:' + Object.values(arr1).includes(clickedName));
-    // console.log('includes method:' + nameArr.includes(clickedName));
-
-
-    if (!name === clickedName) { return }
-    if (name === clickedName) {
-      // boomBoom(arr1, arr2, elm); // this function deleted 
-    }
-
-  })
-
-  arr2.forEach(elm => {
-    let name = elm.name.toLowerCase();
-
-    if (!name === clickedName) { return }
-    if (name === clickedName) {
-
-    }
-  })
-}
-  
-
-
-
 const movingTrucks = (n, arr1, arr2) => {
   console.log(n);
   arr1.forEach(elm => {
+    console.log(elm.favorited);
     let name = elm.name.toLowerCase();
     if (name === n) {
     
       let index = (arr1.indexOf(elm));
       arr1.splice((index), 1);
       arr2.push(elm);     
+      // classToggler()
     }
   })
 }
@@ -183,14 +147,8 @@ const movingTrucks = (n, arr1, arr2) => {
 
 //add class   this is NOT adding the class...
 const classToggler = (elm) => {
-  const button = document.querySelector('[data-button]');
-  // elm.classList.toggle('favorites');
-  // elm.classList == '!favorites' ? elm.classList.add('favorites') : console.log('testing erros');
-  // console.log(elm);
-  console.log(button);
-  button.classList.add('.favorites');
-
-  // elm.button.classList.add('favorites');
+  const style = 'favorites';
+  elm.classList.toggle(style);
 }
 
 
@@ -199,19 +157,8 @@ const classToggler = (elm) => {
 
 // create the favorite key on the object in order to handle this better
 const favToggler = (elm) => {
-  // console.log(`favToggler report elm was "${fav}"`);
-  
 
-  // elm == 'true' ? elm = 'false' : elm = 'true';
-  if (!fav == 'true') {
-    return fav = 'true';
-  }
-  
-  if (fav == 'true') {
-    return fav = 'false';
-  }
 
-  // console.log(`favToggler report elm now is "${fav}"`);
 }
 
 
