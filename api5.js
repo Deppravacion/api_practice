@@ -38,6 +38,7 @@ const getData = async (paths) => {
 
   [iceCreamObj, cookieObj, donutObj] = accounts;
   console.log(accounts);
+  console.log(arraySet);
 
   giveMewhatIWant([iceCreamObj, cookieObj, donutObj], mainArr);
 };
@@ -45,11 +46,11 @@ const getData = async (paths) => {
 getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit=10", "desserts?category=Donut&limit=10"]);
 
 //grab object key/value data
-const giveMewhatIWant = (arr, card) => {
-  arr.forEach(obj => {
+const giveMewhatIWant = (api, arr) => {
+  api.forEach(obj => {
     obj.data.forEach(item => {
-      [name, description, photo, favorited,] = [item.name, item.description, item.photoUrl, ''];
-      card.push({name, description, photo, favorited}); 
+      [name, category,  description, photo, favorited=false,] = [item.name, item.category, item.description, item.photoUrl,];
+      arr.push({name, category, description, photo, favorited}); 
     })
   })
 }
@@ -149,7 +150,7 @@ const movingTrucks = (n, arr1, arr2) => {
 
 //add class   this is NOT adding the class...
 const classToggler = (elm) => {
-  const style = 'favorites';
+  const style = 'yellow';
   elm.classList.toggle(style);
 }
 
