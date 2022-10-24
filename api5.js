@@ -49,7 +49,7 @@ getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit
 const giveMewhatIWant = (api, arr) => {
   api.forEach(obj => {
     obj.data.forEach(item => {
-      [name, category,  description, photo, favorited=false,] = [item.name, item.category, item.description, item.photoUrl,];
+      [name, category,  description, photo, favorited=false,] = [item.name, item.category, item.description, item.photoUrl ];
       arr.push({name, category, description, photo, favorited}); 
     })
   })
@@ -58,27 +58,29 @@ const giveMewhatIWant = (api, arr) => {
 //create html cards
 const createCards = (arr, section) => {
   const cards = arr
-    .map(({name, description, photo}) => (
-    
+
+    .map(({name, category, description, photo, favorited}) => (
       `
-        <div id="card-wrapper" class="card-wrapper " data-cardName="${name}">
-          <div class="card-header">
-            <h2>${name}</h2>         
-          </div>
-          <div class="card-content">         
-            ${description ? `<p>${description}</p>` : ''}
-      
- 
-            <div class="img-wrapper">
-              <img src="${photo}">
-            </div>
-            <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-name="${name.toLowerCase()}">
-              add/remove
-            </div>
-            <div id="star-div" class="star"></div>
-          </div>
+      <div id="card-wrapper" class="card-wrapper " data-cardName="${name}">
+        <div class="card-header">
+          <h2>${name}</h2>         
         </div>
+        <div class="card-content">         
+          ${description ? `<p>${description}</p>` : ''}
+    
+    
+          <div class="img-wrapper">
+            <img src="${photo}">
+          </div>
+          <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-get-fav=${favorited}>
+            add/remove
+          </div>
+          <div id="star-div" class="star"></div>
+        </div>
+      </div>
+
       `
+
     )).join('')
   section.innerHTML = cards;
 }
@@ -89,21 +91,26 @@ document.addEventListener('click', (e) => {
   const divCardWrapper = document.querySelector('#card-wrapper');
   const divStar = document.getElementById('star-div');
 
+
   const target = e.target;
   const data = target.dataset;
   const title = target.title;
 
   const button = data.button; // this is to verify button for click event
   const favorite = data.isFav; // this is where we need to do work
-  const newFav = data.favorited;
+  const newFav = data.getFav;
 
 
-  console.log(newFav);
   if (!button == 'true') {
     return
   }
+  
+  
+  
+  
+  console.log(`this is the newFav '${typeof(newFav)}'`);
 
-  favorite == 'false' ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
+  newFav === false ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
   printAll();
 })
 

@@ -23,3 +23,10 @@ spanBye.classList.toggle('.bye2')
 
 spanHi.style.color = "Red"
 spanHi.style.boxShadow = "1px 1px 4px 10px red"
+
+
+// const myH1 = document.querySelector('h1');
+
+// myH1.addEventListener('click', e => {
+//   myH1.classList.toggle('red')
+// })
