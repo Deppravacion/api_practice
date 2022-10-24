@@ -5,6 +5,8 @@
 //attempted to use movingTrucks to move into favs and into main, but it only moves one way, into favs
 //attempted some destructuring and object.values().includes methods in order to search but was did not find the efficient path
 
+// modify objects from api to include key/value pairs that are useful to me. ie. a favorites set
+
 
 
 
@@ -26,6 +28,23 @@ const arraySet = [mainArr, favoritesArr];
 
 
 
+//cors error fix
+
+// var express = require('express')
+// var cors = require('cors')
+// var app = express()
+
+// app.use(cors())
+
+// app.get('/products/:id', function (req, res, next) {
+//   res.json({msg: 'This is CORS-enabled for all origins!'})
+// })
+
+// app.listen(80, function () {
+//   console.log('CORS-enabled web server listening on port 80')
+// })
+
+
 //grab data from API's
 const getData = async (paths) => {
   const promises = paths
@@ -38,7 +57,9 @@ const getData = async (paths) => {
 
   giveMewhatIWant([treatObj, dogObj], mainArr);
 };
-getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
+// getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
+// getData(["desserts?category=Ice_Cream&limit=25", "desserts?category=Cookie&limit=25"]);
+getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit=10", "desserts?category=Donut&limit=10"]);
 
 //grab object key/value data
 const giveMewhatIWant = (arr, card) => {
@@ -199,14 +220,14 @@ const favToggler = (elm) => {
   // console.log(`favToggler report elm was "${fav}"`);
   
 
-  // // elm == 'true' ? elm = 'false' : elm = 'true';
-  // if (!fav == 'true') {
-  //   return fav = 'true';
-  // }
+  // elm == 'true' ? elm = 'false' : elm = 'true';
+  if (!fav == 'true') {
+    return fav = 'true';
+  }
   
-  // if (fav == 'true') {
-  //   return fav = 'false';
-  // }
+  if (fav == 'true') {
+    return fav = 'false';
+  }
 
   // console.log(`favToggler report elm now is "${fav}"`);
 }
@@ -261,7 +282,7 @@ const printFavorites = () => {
 
 setTimeout(() => {
   printAll();
-}, 690);
+}, 700);
  
 // newDiv.textContent = "hey its a new Div here";
 // body.append(newDiv)
