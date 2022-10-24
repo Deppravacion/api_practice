@@ -27,24 +27,6 @@ const favoritesArr = [];
 const arraySet = [mainArr, favoritesArr];
 
 
-
-//cors error fix
-
-// var express = require('express')
-// var cors = require('cors')
-// var app = express()
-
-// app.use(cors())
-
-// app.get('/products/:id', function (req, res, next) {
-//   res.json({msg: 'This is CORS-enabled for all origins!'})
-// })
-
-// app.listen(80, function () {
-//   console.log('CORS-enabled web server listening on port 80')
-// })
-
-
 //grab data from API's
 const getData = async (paths) => {
   const promises = paths
@@ -52,15 +34,13 @@ const getData = async (paths) => {
     .then(r => r.json()));
   const accounts = await Promise.all(promises);
 
-  // [treatObj, dogObj] = accounts;
+
   [iceCreamObj, cookieObj, donutObj] = accounts;
   console.log(accounts);
 
-  // giveMewhatIWant([treatObj, dogObj], mainArr);
   giveMewhatIWant([iceCreamObj, cookieObj, donutObj], mainArr);
 };
-// getData(["desserts?category=Ice_Cream&limit=50", "dogs"]);
-// getData(["desserts?category=Ice_Cream&limit=25", "desserts?category=Cookie&limit=25"]);
+
 getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit=10", "desserts?category=Donut&limit=10"]);
 
 //grab object key/value data
@@ -76,7 +56,7 @@ const giveMewhatIWant = (arr, card) => {
 //create html cards
 const createCards = (arr, section) => {
   const cards = arr
-    .map(({name, description, breed, age, photo}) => (
+    .map(({name, description, photo}) => (
     
       `
         <div id="card-wrapper" class="card-wrapper " data-cardName="${name}">
@@ -85,8 +65,8 @@ const createCards = (arr, section) => {
           </div>
           <div class="card-content">         
             ${description ? `<p>${description}</p>` : ''}
-            ${breed ? `<p>${breed}</p>` : ''}
-            ${age ? `<p>${age} years old!</p>` : ''}
+      
+ 
             <div class="img-wrapper">
               <img src="${photo}">
             </div>
@@ -120,12 +100,7 @@ document.addEventListener('click', (e) => {
     return
   }
 
-
   favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
-
-  // favorite == 'false' ? cargoShip(name) : movingTrucks(name, favoritesArr, mainArr);
-  // methodStack(divCardWrapper, className, name, target);
-
   printAll();
 })
 
@@ -218,6 +193,11 @@ const classToggler = (elm) => {
   // elm.button.classList.add('favorites');
 }
 
+
+
+
+
+// create the favorite key on the object in order to handle this better
 const favToggler = (elm) => {
   // console.log(`favToggler report elm was "${fav}"`);
   
