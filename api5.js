@@ -2,6 +2,7 @@
 //2. moving trucks needs to be dynamic, move to and for Favs
 //add data attributes as pointers instead of targeting using class names
 
+
 //attempted to use movingTrucks to move into favs and into main, but it only moves one way, into favs
 //attempted some destructuring and object.values().includes methods in order to search but was did not find the efficient path
 
@@ -73,7 +74,7 @@ const createCards = (arr, section) => {
             <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-name="${name.toLowerCase()}">
               add/remove
             </div>
-            <div id="starDiv" class="star"></div>
+            <div id="star-div" class="star"></div>
           </div>
         </div>
       `
@@ -84,22 +85,24 @@ const createCards = (arr, section) => {
 
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
-  const divCardWrapper = document.querySelector('#card-wrapper')
+  const divCardWrapper = document.querySelector('#card-wrapper');
+  const divStar = document.getElementById('star-div');
+
   const target = e.target;
-  const id = target.id;
-  const className = target.className;
-  const title = target.title;
   const data = target.dataset;
-  const favorite = data.isFav;
-  const button = data.button;
-  const name = data.name;
+  const title = target.title;
+
+  const button = data.button; // this is to verify button for click event
+  const favorite = data.isFav; // this is where we need to do work
+  const newFav = data.favorited;
 
 
+  console.log(newFav);
   if (!button == 'true') {
     return
   }
 
-  favorite == 'false' ? movingTrucks(name, mainArr, favoritesArr) : movingTrucks(name, favoritesArr, mainArr);
+  favorite == 'false' ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
   printAll();
 })
 
@@ -132,14 +135,13 @@ const pushArr = (arr, elm) => {
 const movingTrucks = (n, arr1, arr2) => {
   console.log(n);
   arr1.forEach(elm => {
-    console.log(elm.favorited);
     let name = elm.name.toLowerCase();
     if (name === n) {
     
       let index = (arr1.indexOf(elm));
       arr1.splice((index), 1);
       arr2.push(elm);     
-      // classToggler()
+
     }
   })
 }
