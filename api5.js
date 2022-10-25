@@ -61,7 +61,7 @@ const createCards = (arr, section) => {
 
     .map(({name, category, description, photo, favorited}) => (
       `
-      <div id="card-wrapper" ${favorited ? `class="card-wrapper favorites"` : `class="card-wrapper"`}  data-cardName="${name}" >
+      <div id="card-wrapper" ${favorited ? `class="card-wrapper favorites"` : `class="card-wrapper"`}  data-cardName="${name}" data-fav-status=${favorited}>
         <div class="card-header">
           <h2>${name}</h2>         
         </div>
@@ -98,31 +98,27 @@ document.addEventListener('click', (e) => {
   const title = target.title;
 
   const button = data.button; // this is to verify button for click event
-  const favorite = data.isFav; // this is where we need to do work
-  const newFav = Boolean(data.getFav);
+  const favStatus = data.isFav; // this is where we need to do work
+  const newFav = data.getFav;
 
 
   if (!button == 'true') {
     return
   }
-  
-  
-  
-  
-  console.log(`this is the newFav '${typeof(newFav)}'`);
-  console.log(`this is the newFav '${!newFav}'`);
-  console.log('this is.... wrapp' + wrapperData.dataset);
 
-  if (favorite === 'false') {
+  if (newFav === 'false') {
     movingTrucks(title, mainArr, favoritesArr);
-    //isntead of changing the boolean value on teh data-set   simply ADD or REMOVE the data-propterty all together
-    //removeAttribute() setAttribute()
     divCardWrapper.setAttribute('data-get-fav', 'true');
 
+  } else {
+    
+    movingTrucks(title, favoritesArr, mainArr);
+    divCardWrapper.setAttribute('data-get-fav', 'false');
   }
 
-
-  // favorite === 'false' ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
+  // if (favStatus === 'true') { 
+  // }
+    
   printAll();
 })
 
@@ -161,7 +157,8 @@ const movingTrucks = (n, arr1, arr2) => {
       let index = (arr1.indexOf(elm));
       arr1.splice((index), 1);
       arr2.push(elm);   
-      elm.favorited = true;
+      // elm.favorited = true;
+      elm.favorited = !elm.favorited;
 
     }
   })
