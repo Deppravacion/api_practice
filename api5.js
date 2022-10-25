@@ -49,7 +49,7 @@ getData(["desserts?category=Ice_Cream&limit=10", "desserts?category=Cookie&limit
 const giveMewhatIWant = (api, arr) => {
   api.forEach(obj => {
     obj.data.forEach(item => {
-      [name, category,  description, photo, favorited=false,] = [item.name, item.category, item.description, item.photoUrl ];
+      [name, category,  description, photo, favorited=!true,] = [item.name, item.category, item.description, item.photoUrl ];
       arr.push({name, category, description, photo, favorited}); 
     })
   })
@@ -61,7 +61,7 @@ const createCards = (arr, section) => {
 
     .map(({name, category, description, photo, favorited}) => (
       `
-      <div id="card-wrapper" class="card-wrapper " data-cardName="${name}">
+      <div id="card-wrapper" ${favorited ? `class="card-wrapper favorites"` : `class="card-wrapper"`}  data-cardName="${name}" >
         <div class="card-header">
           <h2>${name}</h2>         
         </div>
@@ -75,7 +75,7 @@ const createCards = (arr, section) => {
           <div class="button" id="button" title="${name.toLowerCase()}" data-button="true" data-is-fav="false" data-get-fav=${favorited}>
             add/remove
           </div>
-          <div id="star-div" class="star"></div>
+          <div id="star-div" ${favorited ? `class="star yellow"` : `class="star"`}></div>
         </div>
       </div>
 
@@ -90,6 +90,7 @@ const createCards = (arr, section) => {
 document.addEventListener('click', (e) => {
   const divCardWrapper = document.querySelector('#card-wrapper');
   const divStar = document.getElementById('star-div');
+  const wrapperData = document.querySelector('[data-get-fav]');
 
 
   const target = e.target;
@@ -98,7 +99,7 @@ document.addEventListener('click', (e) => {
 
   const button = data.button; // this is to verify button for click event
   const favorite = data.isFav; // this is where we need to do work
-  const newFav = data.getFav;
+  const newFav = Boolean(data.getFav);
 
 
   if (!button == 'true') {
@@ -109,8 +110,19 @@ document.addEventListener('click', (e) => {
   
   
   console.log(`this is the newFav '${typeof(newFav)}'`);
+  console.log(`this is the newFav '${!newFav}'`);
+  console.log('this is.... wrapp' + wrapperData.dataset);
 
-  newFav === false ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
+  if (favorite === 'false') {
+    movingTrucks(title, mainArr, favoritesArr);
+    //isntead of changing the boolean value on teh data-set   simply ADD or REMOVE the data-propterty all together
+    //removeAttribute() setAttribute()
+    divCardWrapper.setAttribute('data-get-fav', 'true');
+
+  }
+
+
+  // favorite === 'false' ? movingTrucks(title, mainArr, favoritesArr) : movingTrucks(title, favoritesArr, mainArr);
   printAll();
 })
 
@@ -145,10 +157,11 @@ const movingTrucks = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
     if (name === n) {
-    
+      
       let index = (arr1.indexOf(elm));
       arr1.splice((index), 1);
-      arr2.push(elm);     
+      arr2.push(elm);   
+      elm.favorited = true;
 
     }
   })
