@@ -88,30 +88,29 @@ const createCards = (arr, section) => {
 }
 
 //update category totals html
-const createTotals = (arr, section) => { //use arraySet[1]
-  let cream = 0;
-  let cookie = 0;
-  let donut = 0;
-  arr.forEach(e => {
-    const category = e.category;
-    category === 'Ice_Cream' ? cream ++ : '' ;
-    category === 'Cookie' ? cookie ++: cookie;
-    category === 'Donut' ? donut ++ : donut;
+const createTotals = (favorites, node) => { //use arraySet[1]
+
+  let creamTally = 0;
+  let cookieTally = 0;
+  let donutTally = 0;
+  favorites.forEach(favorite => {
+    const category = favorite.category;
+
+    if (category === 'Ice_Cream') {
+      creamTally ++;
+    }
+    if (category === 'Cookie') {
+      cookieTally ++;
+    }
+    if (category === 'Donut') {
+      donut ++;
+    }
+
   })
 
-
-  const cards = arr
-    .map(({category }) => (
-      `
-      <span id="ice-cream" >${cream}</span>
-      <span id="cookie" >${cookie}</span>
-      <span id="donut" >${donut}</span>
-      `
-
-    )).join('')
-  section.innerHTML = cards;
-  
+  printTotals(creamTally, cookieTally, donutTally);
 }
+
 
 
 //click event can stack methods from movingTruck()
@@ -237,9 +236,21 @@ const printMain = () => {
   createCards(mainArr, main);
 }
 
+
+
 const printFavorites = () => {
   createCards(favoritesArr, favorites);
   createTotals(favoritesArr, categoryTotal);
+}
+
+const printTotals = (aSum, bSum, cSum) => { // parameters are the totals
+  const spanCream = document.getElementById('cream');
+  const spanCookie = document.getElementById('cookie');
+  const spanDonut = document.getElementById('donut');
+
+  spanCream.innerText = aSum;
+  spanCookie.innerText = bSum;
+  spanDonut.innerText = cSum;
 }
 
 setTimeout(() => {
@@ -247,4 +258,4 @@ setTimeout(() => {
 }, 800);
  
 // newDiv.textContent = "hey its a new Div here";
-// body.append(newDiv)
+// body.append(newDiv);
