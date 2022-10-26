@@ -66,7 +66,7 @@ const createCards = (arr, section) => {
           <h2>${name}</h2>         
         </div>
         <div class="card-content">         
-          ${description ? `<p>${description}</p>` : ''}
+          ${description ? `<p class="text-scroll">${description}</p>` : ''}
     
     
           <div class="img-wrapper">
@@ -157,8 +157,9 @@ const movingTrucks = (n, arr1, arr2) => {
       let index = (arr1.indexOf(elm));
       arr1.splice((index), 1);
       arr2.push(elm);   
-      // elm.favorited = true;
-      elm.favorited = !elm.favorited;
+      
+      // elm.favorited = !elm.favorited;
+      elm.favorited = elm.favorited ? false : true;
 
     }
   })
