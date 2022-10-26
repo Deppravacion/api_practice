@@ -19,6 +19,8 @@ const container = document.querySelector('.container');
 const main = document.querySelector('[data-section="main"]');
 const master = document.querySelector('[data-section="master"]');
 const favorites = document.querySelector('[data-section="favorites"]');
+const categoryTotal = document.querySelector('[data-section="totals"]');
+// const categoryTotal = document.getElementById('totals');
 
 
 
@@ -85,6 +87,32 @@ const createCards = (arr, section) => {
   section.innerHTML = cards;
 }
 
+//update category totals html
+const createTotals = (arr, section) => { //use arraySet[1]
+  let cream = 0;
+  let cookie = 0;
+  let donut = 0;
+  arr.forEach(e => {
+    const category = e.category;
+    category === 'Ice_Cream' ? cream ++ : '' ;
+    category === 'Cookie' ? cookie ++: cookie;
+    category === 'Donut' ? donut ++ : donut;
+  })
+
+
+  const cards = arr
+    .map(({category }) => (
+      `
+      <span id="ice-cream" >${cream}</span>
+      <span id="cookie" >${cookie}</span>
+      <span id="donut" >${donut}</span>
+      `
+
+    )).join('')
+  section.innerHTML = cards;
+  
+}
+
 
 //click event can stack methods from movingTruck()
 document.addEventListener('click', (e) => {
@@ -102,23 +130,18 @@ document.addEventListener('click', (e) => {
   const newFav = data.getFav;
 
 
-  if (!button == 'true') {
+  if (!(button == 'true')) {
     return
   }
 
   if (newFav === 'false') {
     movingTrucks(title, mainArr, favoritesArr);
     divCardWrapper.setAttribute('data-get-fav', 'true');
-
-  } else {
-    
+  } else {    
     movingTrucks(title, favoritesArr, mainArr);
     divCardWrapper.setAttribute('data-get-fav', 'false');
   }
 
-  // if (favStatus === 'true') { 
-  // }
-    
   printAll();
 })
 
@@ -134,9 +157,6 @@ document.addEventListener('click', e => {
 })
 
     
-
-// put conditionals in these functions
-// then load them into movingTrucks()
 const cutArr = (arr, i) => { 
    
   arr.slice(i, 1) 
@@ -158,31 +178,22 @@ const movingTrucks = (n, arr1, arr2) => {
       arr1.splice((index), 1);
       arr2.push(elm);   
       
-      // elm.favorited = !elm.favorited;
-      elm.favorited = elm.favorited ? false : true;
-
+      elm.favorited = !elm.favorited;
+      // elm.favorited = elm.favorited ? false : true;
     }
   })
 }
 
-
 //add class   this is NOT adding the class...
 const classToggler = (elm) => {
-  const style = 'yellow';
-  elm.classList.toggle(style);
+  elm.classList.toggle('yellow');
 }
-
-
-
-
 
 // create the favorite key on the object in order to handle this better
 const favToggler = (elm) => {
-
+  //logic applied in template literals within the card itself
 
 }
-
-
 
 
 //sorting functions  
@@ -228,11 +239,12 @@ const printMain = () => {
 
 const printFavorites = () => {
   createCards(favoritesArr, favorites);
+  createTotals(favoritesArr, categoryTotal);
 }
 
 setTimeout(() => {
   printAll();
-}, 700);
+}, 800);
  
 // newDiv.textContent = "hey its a new Div here";
 // body.append(newDiv)
