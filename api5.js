@@ -1,17 +1,3 @@
-//1. toggle class function is non Oper
-//2. moving trucks needs to be dynamic, move to and for Favs
-//add data attributes as pointers instead of targeting using class names
-
-
-//attempted to use movingTrucks to move into favs and into main, but it only moves one way, into favs
-//attempted some destructuring and object.values().includes methods in order to search but was did not find the efficient path
-
-// modify objects from api to include key/value pairs that are useful to me. ie. a favorites set
-
-
-
-
-
 
 const body = document.body;
 const newDiv = document.createElement('div');
@@ -20,10 +6,6 @@ const main = document.querySelector('[data-section="main"]');
 const master = document.querySelector('[data-section="master"]');
 const favorites = document.querySelector('[data-section="favorites"]');
 const categoryTotal = document.querySelector('[data-section="totals"]');
-// const categoryTotal = document.getElementById('totals');
-
-
-
 
 const mainArr = [];
 const favoritesArr = [];
@@ -36,11 +18,7 @@ const getData = async (paths) => {
     .map(path => fetch(`https://freerandomapi.cyclic.app/api/v1/${path}`)
     .then(r => r.json()));
   const accounts = await Promise.all(promises);
-
-
   [iceCreamObj, cookieObj, donutObj] = accounts;
-  console.log(accounts);
-  console.log(arraySet);
 
   giveMewhatIWant([iceCreamObj, cookieObj, donutObj], mainArr);
 };
@@ -134,17 +112,15 @@ document.addEventListener('click', (e) => {
   }
 
   if (newFav === 'false') {
-    movingTrucks(title, mainArr, favoritesArr);
+    movingElements(title, mainArr, favoritesArr);
     divCardWrapper.setAttribute('data-get-fav', 'true');
   } else {    
-    movingTrucks(title, favoritesArr, mainArr);
+    movingElements(title, favoritesArr, mainArr);
     divCardWrapper.setAttribute('data-get-fav', 'false');
   }
 
   printAll();
 })
-
-
 
 //click event for sorting function
 document.addEventListener('click', e => {
@@ -155,20 +131,10 @@ document.addEventListener('click', e => {
   printFavorites();
 })
 
-    
-const cutArr = (arr, i) => { 
-   
-  arr.slice(i, 1) 
-}
-
-const pushArr = (arr, elm) => { 
-  arr.push(elm); 
-}
 
 //function n is the string to match, arr1 is the array to search, arr2 arr to push
 
-const movingTrucks = (n, arr1, arr2) => {
-  console.log(n);
+const movingElements = (n, arr1, arr2) => {
   arr1.forEach(elm => {
     let name = elm.name.toLowerCase();
     if (name === n) {
@@ -186,12 +152,6 @@ const movingTrucks = (n, arr1, arr2) => {
 //add class   this is NOT adding the class...
 const classToggler = (elm) => {
   elm.classList.toggle('yellow');
-}
-
-// create the favorite key on the object in order to handle this better
-const favToggler = (elm) => {
-  //logic applied in template literals within the card itself
-
 }
 
 
@@ -236,8 +196,6 @@ const printMain = () => {
   createCards(mainArr, main);
 }
 
-
-
 const printFavorites = () => {
   createCards(favoritesArr, favorites);
   createTotals(favoritesArr, categoryTotal);
@@ -256,6 +214,3 @@ const printTotals = (aSum, bSum, cSum) => { // parameters are the totals
 setTimeout(() => {
   printAll();
 }, 800);
- 
-// newDiv.textContent = "hey its a new Div here";
-// body.append(newDiv);
