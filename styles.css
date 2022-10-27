@@ -23,6 +23,18 @@ h1 {
 
 }
 
+#totals{
+  margin: auto;
+  background: rgb(62, 49, 80);
+  color: antiquewhite;
+  border-radius: 16px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  line-height: 2;
+  max-height: 75px;
+  min-height: 55px;
+}
+
 .card-wrapper {
   border: 1px solid black;
   border-radius: 8px;
