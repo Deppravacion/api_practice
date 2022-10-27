@@ -1,0 +1,1 @@
+https://favorites-api.vercel.app/

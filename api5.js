@@ -81,7 +81,7 @@ const createTotals = (favorites, node) => { //use arraySet[1]
       cookieTally ++;
     }
     if (category === 'Donut') {
-      donut ++;
+      donutTally ++;
     }
 
   })
